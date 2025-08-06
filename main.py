@@ -54,4 +54,7 @@ if user_prompt:
 
     # Display Gemini-Pro's response
     with st.chat_message("assistant"):
-        st.markdown(gemini_response.text)
+        try:
+            st.markdown(gemini_response.text)
+        except ValueError:
+            st.markdown("".join(part.text for part in gemini_response.parts if hasattr(part, "text")))
